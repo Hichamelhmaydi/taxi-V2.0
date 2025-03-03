@@ -28,20 +28,19 @@
 <!-- Navbar -->
 <nav class="bg-black text-white shadow-md">
     <div class="container mx-auto px-4 py-5 flex justify-between items-center">
-        <div class="flex items-center">
-            <a href="#" class="text-white text-2xl font-semibold hover:text-yellow-400 transition-colors">GrandTaxiGo</a>
-        </div>
+        <a href="#" class="text-white text-2xl font-semibold hover:text-yellow-400 transition-colors">GrandTaxiGo</a>
         <div class="space-x-6 text-lg">
-            <a href="#services" class="hover:text-yellow-400 transition-colors"> Services</a>
+            <a href="#services" class="hover:text-yellow-400 transition-colors">Services</a>
             <a href="#reservations" class="hover:text-yellow-400 transition-colors">Réservation</a>
             <a href="#about" class="hover:text-yellow-400 transition-colors">À propos</a>
             <a href="#contact" class="hover:text-yellow-400 transition-colors">Contact</a>
-           
-                <a href="{{ route('register') }}" class="btn btn-success btn-lg">S'inscrire</a>
-                <a href="{{ route('login') }}" class="btn btn-danger btn-lg">Connexion</a>
-                <a href="{{ route('admin.login') }}" class="btn btn-danger btn-lg">admin-Connexion</a>
-   
-                </div>
+            @auth
+                <a href="{{ route('dashboard') }}" class="btn btn-primary">Tableau de Bord</a>
+            @else
+                <a href="{{ route('register') }}" class="btn btn-success">S'inscrire</a>
+                <a href="{{ route('login') }}" class="btn btn-danger">Connexion</a>
+                <a href="{{ route('admin.login') }}" class="btn btn-danger">Admin-Connexion</a>
+            @endauth
         </div>
     </div>
 </nav>
