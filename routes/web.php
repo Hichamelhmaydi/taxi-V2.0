@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChauffeurController;
 use App\Http\Controllers\PassagerController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/register', function () { return view('auth.register'); })->name('register');
@@ -35,4 +36,5 @@ Route::prefix('admin')->group(function () {
         })->name('admin.dashboard');
     });
 });
+Route::post('/update-status', [UserController::class, 'updateStatus'])->name('update.status');
 
