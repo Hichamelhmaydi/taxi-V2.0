@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
 
 Route::get('/register', function () { return view('auth.register'); })->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -61,3 +62,4 @@ Route::get('/auth/google/callback', function () {
 
     return redirect('/'); 
 });
+Route::get('/', [HomeController::class, 'index'])->name('home');

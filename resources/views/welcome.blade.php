@@ -51,81 +51,20 @@
         <h2 class="text-4xl font-extrabold text-gray-900 mb-6">Réservez votre voyage maintenant</h2>
         <p class="text-lg text-gray-600">Choisissez votre taxi, votre destination et profitez d'un trajet sécurisé et confortable.</p>
     </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Taxi Standard -->
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl relative">
-            <img class="w-full h-56 object-cover" src="https://via.placeholder.com/500x300?text=Taxi+Standard" alt="Taxi Standard">
-            <div class="absolute top-4 right-4 text-yellow-600 text-3xl opacity-80 hover:opacity-100 transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-10 h-10">
-                    <path d="M12 2v20m-10-10h20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
+    @auth
+    @if(auth()->user()->role === 'passager')
+    <h2 class="text-2xl font-bold text-gray-900 mb-4">Chauffeurs Disponibles</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        @foreach($chauffeurs as $chauffeur)
+            <div class="bg-white p-4 shadow rounded-lg text-center">
+                <h3 class="text-xl font-semibold text-gray-800">{{ $chauffeur->name }}</h3>
+                <p class="text-gray-600">{{ $chauffeur->email }}</p>
+                <a href="#" class="mt-2 inline-block bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">Réserver</a>
             </div>
-            <div class="p-6">
-                <h3 class="text-2xl font-semibold text-gray-800">Taxi Standard</h3>
-                <p class="text-gray-600 mt-4">Un véhicule confortable et spacieux pour vos déplacements entre villes à prix abordable.</p>
-                <button class="mt-6 bg-yellow-600 text-black py-2 px-6 rounded-full text-lg hover:bg-yellow-700 transition-all">
-                    Réserver maintenant
-                </button>
-            </div>
-        </div>
-
-        <!-- Taxi VIP -->
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl relative">
-            <img class="w-full h-56 object-cover" src="https://via.placeholder.com/500x300?text=Taxi+VIP" alt="Taxi VIP">
-            <div class="absolute top-4 right-4 text-yellow-600 text-3xl opacity-80 hover:opacity-100 transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-10 h-10">
-                    <path d="M12 2v20m-10-10h20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
-            </div>
-            <div class="p-6">
-                <h3 class="text-2xl font-semibold text-gray-800">Taxi VIP</h3>
-                <p class="text-gray-600 mt-4">Voyagez dans le luxe et le confort avec nos taxis VIP, offrant des services premium adaptés à vos besoins.</p>
-                <button class="mt-6 bg-black text-white py-2 px-6 rounded-full text-lg hover:bg-gray-800 transition-all">
-                    Réserver maintenant
-                </button>
-            </div>
-        </div>
-
-        <!-- Taxi Économique -->
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl relative">
-            <img class="w-full h-56 object-cover" src="https://via.placeholder.com/500x300?text=Taxi+Économique" alt="Taxi Économique">
-            <div class="absolute top-4 right-4 text-yellow-600 text-3xl opacity-80 hover:opacity-100 transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-10 h-10">
-                    <path d="M12 2v20m-10-10h20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
-            </div>
-            <div class="p-6">
-                <h3 class="text-2xl font-semibold text-gray-800">Taxi Économique</h3>
-                <p class="text-gray-600 mt-4">Option économique mais confortable pour vos trajets à moindre coût, tout en garantissant votre satisfaction.</p>
-                <button class="mt-6 bg-yellow-600 text-black py-2 px-6 rounded-full text-lg hover:bg-yellow-700 transition-all">
-                    Réserver maintenant
-                </button>
-            </div>
-        </div>
+        @endforeach
     </div>
-
-    <!-- About Section -->
-    <section id="about" class="py-16 bg-gray-100">
-        <div class="container mx-auto text-center">
-            <h2 class="text-4xl font-extrabold text-gray-900 mb-6">À propos de notre service</h2>
-            <p class="text-lg text-gray-600">GrandTaxiGo vous offre une expérience de transport fiable et confortable. Nous mettons à votre disposition une flotte de véhicules adaptés à tous vos besoins, que ce soit pour un voyage d'affaires ou une escapade en famille.</p>
-            <div class="mt-8 flex justify-center space-x-8">
-                <div class="w-1/3">
-                    <img src="https://via.placeholder.com/300x200?text=Voyage+Confortable" alt="Voyage Confortable" class="rounded-lg shadow-lg">
-                    <p class="mt-4 text-gray-600">Voyagez dans le confort absolu.</p>
-                </div>
-                <div class="w-1/3">
-                    <img src="https://via.placeholder.com/300x200?text=Service+Fiable" alt="Service Fiable" class="rounded-lg shadow-lg">
-                    <p class="mt-4 text-gray-600">Service fiable et ponctuel.</p>
-                </div>
-                <div class="w-1/3">
-                    <img src="https://via.placeholder.com/300x200?text=Prix+Abordables" alt="Prix Abordables" class="rounded-lg shadow-lg">
-                    <p class="mt-4 text-gray-600">Des prix abordables pour tous.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+@endif
+    @endauth
 
 </main>
 <!-- Footer -->
