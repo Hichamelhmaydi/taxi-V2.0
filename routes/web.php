@@ -7,6 +7,9 @@ use App\Http\Controllers\ChauffeurController;
 use App\Http\Controllers\PassagerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisterController;
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/register', function () { return view('auth.register'); })->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -38,3 +41,23 @@ Route::prefix('admin')->group(function () {
 });
 Route::post('/update-status', [UserController::class, 'updateStatus'])->name('update.status');
 
+Route::get('/auth/google', function () {
+    return Socialite::driver('google')->redirect();
+})->name('auth.google');
+
+Route::get('/auth/google/callback', function () {
+    $googleUser = Socialite::driver('google')->user();
+
+    $user = User::updateOrCreate(
+        ['email' => $googleUser->getEmail()],
+        [
+            'name' => $googleUser->getName(),
+            'password' => bcrypt(uniqid()), 
+            'role' => 'passager', 
+        ]
+    );
+
+    Auth::login($user);
+
+    return redirect('/'); 
+});
