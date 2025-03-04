@@ -11,6 +11,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReservationController;
 
 Route::get('/register', function () { return view('auth.register'); })->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -63,3 +64,9 @@ Route::get('/auth/google/callback', function () {
     return redirect('/'); 
 });
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/reservation/{chauffeur}', [ReservationController::class, 'create'])->name('reservation.create');
+    Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
+});

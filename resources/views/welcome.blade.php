@@ -58,8 +58,8 @@
         @foreach($chauffeurs as $chauffeur)
             <div class="bg-white p-4 shadow rounded-lg text-center">
                 <h3 class="text-xl font-semibold text-gray-800">{{ $chauffeur->name }}</h3>
-                <p class="text-gray-600">{{ $chauffeur->email }}</p>
-                <a href="#" class="mt-2 inline-block bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">Réserver</a>
+                <p class="text-gray-600 m-5">{{ $chauffeur->email }}</p>
+                <a href="{{ route('reservation.create', $chauffeur->id) }}" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700 transition">Réserver</a>
             </div>
         @endforeach
     </div>
