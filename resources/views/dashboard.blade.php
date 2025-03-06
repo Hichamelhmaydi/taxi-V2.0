@@ -35,7 +35,30 @@
             </p>
             <button id="update-status-btn" class="px-6 py-3.5 text-base font-medium text-white bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-600 rounded-lg text-center">
                 Mettre à jour statut
-            </button>
+            </button><br></br>
+            <hr>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Réservations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach($reservations as $reservation)
+                <div class="bg-white p-4 shadow rounded-lg text-center">
+                    <p>{{ $reservation->date_heure_depart }}</p>
+                    <p>{{ $reservation->lieu_depart }} - {{ $reservation->lieu_arrivee }}</p>
+                    <p>{{ $reservation->statut }}</p>
+                </div>
+                <form method="POST" action="{{ route('accepte-reservation', $reservation->id) }}">
+                    @csrf
+                    <button type="submit" class="px-6 py-3.5 text-base font-medium text-white bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-600 rounded-lg text-center">
+                        Accepter
+                    </button>
+                </form>
+                <form method="POST" action="{{ route('refuse-reservation', $reservation->id) }}">
+                    @csrf
+                    <button type="submit" class="px-6 py-3.5 text-base font-medium text-white bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-600 rounded-lg text-center">
+                        Refuser
+                    </button>
+                </form>                
+            @endforeach
+            
     @elseif(auth()->user()->role === 'passager')
         <p class="text-green-500 mt-4">Vous êtes un passager.</p>
     @endif

@@ -22,6 +22,7 @@
 <main class="container mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
     <h2 class="text-2xl font-bold mb-6">Dashboard Admin</h2>
     <p class="text-lg text-gray-700">Bienvenue, <span class="font-semibold text-yellow-600">{{ auth()->guard('admin')->user()->name }}</span>!</p>
+    
 </main>
 
 <!-- Footer -->

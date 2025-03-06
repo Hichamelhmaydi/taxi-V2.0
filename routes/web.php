@@ -70,3 +70,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reservation/{chauffeur}', [ReservationController::class, 'create'])->name('reservation.create');
     Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
 });
+Route::get('/dashboard', [ReservationController::class, 'show'])->name('dashboard');
+Route::post('/accepte-reservation/{id}', [ReservationController::class, 'accepteReservation'])->name('accepte-reservation');
+Route::post('/refuse-reservation/{id}', [ReservationController::class, 'refuseReservation'])->name('refuse-reservation');
