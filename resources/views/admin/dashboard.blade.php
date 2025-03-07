@@ -74,13 +74,12 @@
                 <p class="text-lg text-gray-700">Départ: {{ $reservation->lieu_depart }}</p>
                 <p class="text-lg text-gray-700">Destination: {{ $reservation->lieu_arrivee }}</p>
             </div>
-            <form  method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette réservation ?');">
+            <form action="{{ route('admin.cancelReservation', $reservation->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment annuler cette réservation ?');">
                 @csrf
-                @method('DELETE') 
                 <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
-                    Supprimer
+                    Annuler la réservation
                 </button>
-            </form>
+            </form>            
         </div>
         @endforeach
     </div>

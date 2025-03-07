@@ -39,8 +39,21 @@ class AdminController extends Controller {
         $users = User::all();
         $reservations = Reservation::join('users', 'reservations.passager_id', '=', 'users.id')
         ->select('reservations.*', 'users.name as passager_name')
+        ->whereIn('reservations.statut', ['confirmée', 'terminée', 'en_attente'])
         ->get();
     
         return view('admin.dashboard', compact('users', 'usersCount', 'reservationsCount', 'reservations'));
+    }
+    public function cancelReservation($id) {
+        $reservation = Reservation::find($id);
+    
+        if ($reservation) {
+            $reservation->statut = 'annulée';
+            $reservation->save();
+    
+            return redirect()->route('admin.dashboard')->with('success', 'La réservation a été annulée avec succès.');
+        }
+    
+        return redirect()->route('admin.dashboard')->with('error', 'Réservation introuvable.');
     }
 }
