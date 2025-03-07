@@ -9,13 +9,11 @@ use App\Models\User;
 
 class ReservationController extends Controller
 {
-    public function create(User $chauffeur)
-    {
+    public function create(User $chauffeur){
         return view('reservations.create', compact('chauffeur'));
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $request->validate([
             'chauffeur_id' => 'required|exists:users,id',
             'lieu_depart' => 'required|string',
@@ -41,8 +39,7 @@ class ReservationController extends Controller
         return view('dashboard', compact('reservations'));
     }
 
-    public function updateStatus(Request $request)
-    {
+    public function updateStatus(Request $request){
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'Vous devez être connecté.');
         }

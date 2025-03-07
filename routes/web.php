@@ -72,5 +72,6 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/dashboard', [ReservationController::class, 'show'])->name('dashboard');
 Route::post('/accepte-reservation/{id}', [ReservationController::class, 'accepteReservation'])->name('accepte-reservation');
 Route::post('/refuse-reservation/{id}', [ReservationController::class, 'refuseReservation'])->name('refuse-reservation');
-Route::get('/admin/dashboard', [AdminController::class, 'manageUsers'])->name('admin.dashboard');
 Route::delete('/delete-user/{id}', [AdminController::class, 'deleteUser'])->name('delete.user');
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::post('/admin/cancel-reservation/{id}', [AdminController::class, 'cancelReservation'])->name('admin.cancelReservation');

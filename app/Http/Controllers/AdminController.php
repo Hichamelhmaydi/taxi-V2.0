@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
 use App\Models\User;
+use App\Models\Reservation;
 
 class AdminController extends Controller {
     public function showLoginForm() {
@@ -27,13 +28,19 @@ class AdminController extends Controller {
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login')->with('success', 'déconnecté avec succès'); 
     }
-    public function manageUsers(){
-        $users = User::all();
-        return view('admin.dashboard', compact('users'));
-    }
     public function deleteUser($id){
         $user = User::findOrFail($id);
         $user->delete(); 
         return redirect()->route('admin.dashboard')->with('success', 'Utilisateur supprimé avec succès');
-    }    
+    }   
+    public function dashboard(){
+        $usersCount = User::whereNotNull('id')->count();  
+        $reservationsCount = Reservation::whereNotNull('id')->count();  
+        $users = User::all();
+        $reservations = Reservation::join('users', 'reservations.passager_id', '=', 'users.id')
+        ->select('reservations.*', 'users.name as passager_name')
+        ->get();
+    
+        return view('admin.dashboard', compact('users', 'usersCount', 'reservationsCount', 'reservations'));
+    }
 }
