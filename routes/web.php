@@ -42,7 +42,6 @@ Route::prefix('admin')->group(function () {
     });
 });
 Route::post('/update-status', [UserController::class, 'updateStatus'])->name('update.status');
-
 Route::get('/auth/google', function () {
     return Socialite::driver('google')->redirect();
 })->name('auth.google');
@@ -73,3 +72,5 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/dashboard', [ReservationController::class, 'show'])->name('dashboard');
 Route::post('/accepte-reservation/{id}', [ReservationController::class, 'accepteReservation'])->name('accepte-reservation');
 Route::post('/refuse-reservation/{id}', [ReservationController::class, 'refuseReservation'])->name('refuse-reservation');
+Route::get('/admin/dashboard', [AdminController::class, 'manageUsers'])->name('admin.dashboard');
+Route::delete('/delete-user/{id}', [AdminController::class, 'deleteUser'])->name('delete.user');
