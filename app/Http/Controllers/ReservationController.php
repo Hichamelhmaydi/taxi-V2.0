@@ -30,7 +30,7 @@ class ReservationController extends Controller
             'statut' => 'en_attente',
         ]);
 
-        return redirect('/')->with('success', 'Votre réservation a été enregistrée avec succès!');
+        return redirect('checkout')->with('success', 'Votre réservation a été enregistrée avec succès!');
     }
 
     public function show()

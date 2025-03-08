@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/register', function () { return view('auth.register'); })->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -75,3 +76,7 @@ Route::post('/refuse-reservation/{id}', [ReservationController::class, 'refuseRe
 Route::delete('/delete-user/{id}', [AdminController::class, 'deleteUser'])->name('delete.user');
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 Route::post('/admin/cancel-reservation/{id}', [AdminController::class, 'cancelReservation'])->name('admin.cancelReservation');
+Route::get('/checkout', [PaymentController::class, 'showCheckout'])->name('checkout');
+Route::post('/pay', [PaymentController::class, 'processPayment'])->name('pay');
+Route::get('/payment/success', [PaymentController::class, 'showSuccessPage'])->name('payment.success');
+Route::get('/payment/failed', [PaymentController::class, 'showFailedPage'])->name('payment.failed');
